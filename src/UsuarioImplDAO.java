@@ -1,10 +1,33 @@
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioImplDAO implements GenericoDAO<Usuario>{
 
+    private Connection connection;
+
+
+    
+    public UsuarioImplDAO() {
+        this.connection= ConnectionManager.getInstance().getConnection();
+    }
+
     @Override
-    public void add(Usuario obj) {
-        // TODO Auto-generated method stub
+    public void add(Usuario obj) throws SQLException {
+        
+        String query= "INSERT INTO Usuarios (documento,nombre,correo)"+
+                      "VALUES (?,?,?)";
+        try(
+            PreparedStatement stmt= connection.prepareStatement(query)){
+                stmt.setString(1, obj.getDocumento());
+                stmt.setString(2, obj.getNombre());
+                stmt.setString(3, obj.getCorreo());
+
+            }
         
     }
 
@@ -15,9 +38,19 @@ public class UsuarioImplDAO implements GenericoDAO<Usuario>{
     }
 
     @Override
-    public List<Usuario> getAll() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Usuario> getAll() throws SQLException {
+        List<Usuario> usuarios= new ArrayList<>();
+        String query= "SELECT * FROM Usuarios";
+        try( Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(query);){
+            while (rs.next()){
+                usuarios.add(new Usuario(rs.getInt("id"),
+                rs.getString("documento"),
+                rs.getString("nombre"),
+                rs.getString("correo")));
+            }
+        }
+        return usuarios;
     }
 
     @Override
