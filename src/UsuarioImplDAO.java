@@ -26,7 +26,8 @@ public class UsuarioImplDAO implements GenericoDAO<Usuario>{
                 stmt.setString(1, obj.getDocumento());
                 stmt.setString(2, obj.getNombre());
                 stmt.setString(3, obj.getCorreo());
-
+                stmt.executeUpdate();
+                
             }
         
     }
@@ -44,7 +45,8 @@ public class UsuarioImplDAO implements GenericoDAO<Usuario>{
         try( Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(query);){
             while (rs.next()){
-                usuarios.add(new Usuario(rs.getInt("id"),
+                usuarios.add(new Usuario(
+                rs.getInt("idUsuarios"),
                 rs.getString("documento"),
                 rs.getString("nombre"),
                 rs.getString("correo")));
