@@ -1,6 +1,22 @@
+import java.sql.SQLException;
+import java.util.List;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        
+        UsuarioImplDAO usuarioDAO= new UsuarioImplDAO();
+        try{
+            Usuario miUsuario= new Usuario("1049644444", "Antony", "a@b");
+            usuarioDAO.add(miUsuario);
+            System.out.println("Usuario agregado!");
+            List<Usuario> usuarios= usuarioDAO.getAll();
+            for (Usuario usuario : usuarios) {
+                System.out.println(usuario);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
     }
 
     /*

@@ -5,6 +5,13 @@ public class Usuario {
     private String correo;
     public Usuario() {
     }
+    
+    public Usuario(String documento, String nombre, String correo) {
+        this.documento = documento;
+        this.nombre = nombre;
+        this.correo = correo;
+    }
+
     public Usuario(int id, String documento, String nombre, String correo) {
         this.id = id;
         this.documento = documento;
