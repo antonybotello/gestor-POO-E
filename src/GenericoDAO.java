@@ -1,10 +1,11 @@
+import java.sql.SQLException;
 import java.util.List;
 
 public interface GenericoDAO<T> {
-    void add(T obj );
-    T getById(int id);
-    List<T> getAll();
-    void update(T obj);
-    void delete(int id);
+    void add(T obj ) throws SQLException;
+    T getById(int id) throws SQLException;
+    List<T> getAll() throws SQLException;
+    void update(T obj) throws SQLException;
+    void delete(int id) throws SQLException;
     
 }
