@@ -53,5 +53,18 @@ public class UsuarioController {
             System.out.println("Error al actualizar Usuario!");
         }
     }
+
+    public Usuario obtenerUsuario(int id) throws SQLException{
+        try {
+            Usuario user= usuarioDAO.getById(id);
+            System.out.println("Exito al actualizar Usuario!");
+            return user;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error al actualizar Usuario!");
+            return null;
+        }
+    }
     
 }

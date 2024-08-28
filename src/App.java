@@ -42,9 +42,18 @@ public class App {
                     usuarioC.eliminarUsuario(id);
                     break;
                     case 4:
-                
+                    System.out.println("Digite el id del usuario a actualizar");
+                    id = teclado.nextInt();
                     teclado.nextLine();
-                    // usuarioC.(id);
+                    Usuario usuario= usuarioC.obtenerUsuario(id);
+                    System.out.println("Digite el nuevo nombre");
+                    nombre=teclado.nextLine();
+                    usuario.setNombre(nombre);
+                    System.out.println("Digite el nuevo correo");
+                    correo=teclado.nextLine();
+                    usuario.setCorreo(correo);
+                    
+                    usuarioC.actualizarUsuario(usuario);
                     break;
                 case 0:
                     System.out.println("Hasta pronto!");
